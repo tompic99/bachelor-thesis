@@ -94,3 +94,7 @@ class ContagionModel(Model):
         """Advance the model by one step."""
         self.agents.shuffle_do("step")
         self.datacollector.collect(self)
+        
+        # Check if all agents have adopted, if so, stop the simulation
+        if all(agent.state == "Adopted" for agent in self.agents):
+            self.running = False
