@@ -1,6 +1,4 @@
 import mesa
-print(f"mesa.__version__: {mesa.__version__}")
-
 from mesa.visualization import SolaraViz, make_plot_component, make_space_component
 from model import ContagionModel
 import solara
@@ -14,7 +12,7 @@ def agent_portrayal(agent):
         color = "tab:red"
     elif agent.state == "Aware":
         color = "tab:blue"
-    return {"size": 100, "color": color}
+    return {"size": 100, "color": color, "marker": "o", "label": agent.state}
 
 def post_process_lineplot(ax):
     ax.set_ylim(ymin=0)
@@ -67,7 +65,7 @@ model_params = {
         "value": 10,
         "min": 10,
         "max": 100,
-        "step": 10
+        "step": 1
     },
     "network_type": {
         "type": "Select",
@@ -84,7 +82,7 @@ model_params = {
         "value": 0.1,
         "min": 0,
         "max": 1,
-        "step": 0.1
+        "step": 0.01
     },
     # Small world parameters
     "sw_k": {
@@ -93,7 +91,7 @@ model_params = {
         "value": 0.3,
         "min": 0.1,
         "max": 0.5,
-        "step": 0.1
+        "step": 0.01
     },
     "sw_p": {
         "type": "SliderFloat",
@@ -101,7 +99,7 @@ model_params = {
         "value": 0.2,
         "min": 0,
         "max": 1,
-        "step": 0.1
+        "step": 0.01
     },
     # Random network parameters
     "r_p": {
@@ -110,7 +108,7 @@ model_params = {
         "value": 0.3,
         "min": 0,
         "max": 1,
-        "step": 0.1
+        "step": 0.01
     },
     # Scale-free network parameters
     "sf_m": {

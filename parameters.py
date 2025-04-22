@@ -1,3 +1,4 @@
+from params import params, iterations, max_steps, number_processes, data_collection_period, display_progress
 from model import ContagionModel
 
 from mesa.batchrunner import batch_run
@@ -5,17 +6,14 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-#params = {"num_agents": [5], "network_type": ["small_world"], "seed_fraction": [0.02, 0.2], "seeding_strategy": ["random", "high_degree", "low_degree", "hybrid", "community"], "seed": [42]}
-params = {"num_agents": [1000], "network_type": ["small_world"], "seed_fraction": [0.01, 0.1], "seeding_strategy": ["random", "high_degree", "low_degree", "hybrid", "community"], "seed": [42]}
-
 results = batch_run(
     ContagionModel,
     parameters=params,
-    iterations=1,
-    max_steps=1000,
-    number_processes=1,
-    data_collection_period=1,
-    display_progress=True,
+    iterations=iterations,
+    max_steps=max_steps,
+    number_processes=number_processes,
+    data_collection_period=data_collection_period,
+    display_progress=display_progress,
 )
 
 results_df = pd.DataFrame(results)
